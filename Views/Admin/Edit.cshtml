@@ -1,0 +1,27 @@
+@model YetkiliyeBildir.Models.Report
+@{
+    ViewData["Title"] = "Durum Güncelle";
+    var statuses = ViewBag.Statuses as System.Array;
+}
+<h2>Durum Güncelle</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label class="form-label">Durum</label>
+        <select name="Status" class="form-select">
+            @foreach (var status in statuses)
+            {
+                if (Model.Status == (YetkiliyeBildir.Models.ReportStatus)status)
+                {
+                    <option value="@status" selected="selected">@status</option>
+                }
+                else
+                {
+                    <option value="@status">@status</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a class="btn btn-secondary" asp-action="Index">Geri</a>
+</form> 

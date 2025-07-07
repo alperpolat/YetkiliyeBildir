@@ -1,0 +1,45 @@
+@model IEnumerable<YetkiliyeBildir.Models.Report>
+@{
+    ViewData["Title"] = "İhbar Yönetimi";
+}
+<h2>İhbar Yönetimi</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Kategori</th>
+            <th>Açıklama</th>
+            <th>Durum</th>
+            <th>Tarih</th>
+            <th>Fotoğraf</th>
+            <th>Konum</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Category</td>
+                <td>@item.Description</td>
+                <td>@item.Status</td>
+                <td>@item.CreatedAt.ToString("g")</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.PhotoPath))
+                    {
+                        <img src="@item.PhotoPath" alt="Fotoğraf" width="80" />
+                    }
+                </td>
+                <td>
+                    @if (item.Latitude != null && item.Longitude != null)
+                    {
+                        <a href="https://www.google.com/maps?q=@item.Latitude,@item.Longitude" target="_blank">Haritada Göster</a>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Detay</a>
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Durum</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 

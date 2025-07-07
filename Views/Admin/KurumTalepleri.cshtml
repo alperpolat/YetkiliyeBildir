@@ -1,0 +1,26 @@
+@model List<YetkiliyeBildir.Models.Report>
+@{
+    ViewData["Title"] = "Kurum Talepleri";
+}
+<h2>Kurum Talepleri</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Kategori</th>
+            <th>Açıklama</th>
+            <th>Durum</th>
+            <th>Oluşturulma</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Category</td>
+                <td>@r.Description</td>
+                <td>@r.Status</td>
+                <td>@r.CreatedAt</td>
+            </tr>
+        }
+    </tbody>
+</table> 

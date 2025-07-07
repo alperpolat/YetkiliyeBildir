@@ -1,0 +1,24 @@
+@model List<YetkiliyeBildir.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Kurum Personelleri";
+}
+<h2>Kurum Personelleri</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ad Soyad</th>
+            <th>Telefon</th>
+            <th>E-posta</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.AdSoyad</td>
+                <td>@user.Telefon</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    </tbody>
+</table> 

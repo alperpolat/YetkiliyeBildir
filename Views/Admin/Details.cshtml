@@ -1,0 +1,34 @@
+@model YetkiliyeBildir.Models.Report
+@{
+    ViewData["Title"] = "İhbar Detayı";
+}
+<h2>İhbar Detayı</h2>
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Kategori</dt>
+            <dd class="col-sm-9">@Model.Category</dd>
+            <dt class="col-sm-3">Açıklama</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+            <dt class="col-sm-3">Durum</dt>
+            <dd class="col-sm-9">@Model.Status</dd>
+            <dt class="col-sm-3">Tarih</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("g")</dd>
+            <dt class="col-sm-3">Fotoğraf</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                {
+                    <img src="@Model.PhotoPath" alt="Fotoğraf" width="200" />
+                }
+            </dd>
+            <dt class="col-sm-3">Konum</dt>
+            <dd class="col-sm-9">
+                @if (Model.Latitude != null && Model.Longitude != null)
+                {
+                    <a href="https://www.google.com/maps?q=@Model.Latitude,@Model.Longitude" target="_blank">Haritada Göster</a>
+                }
+            </dd>
+        </dl>
+        <a class="btn btn-secondary" asp-action="Index">Geri</a>
+    </div>
+</div> 
