@@ -177,6 +177,19 @@ namespace YetkiliyeBildir.Controllers
             return View(talepler);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
+        public async Task<IActionResult> KurumAksiyonGuncelle(int id, string firmaAksiyon, string firmaNotu)
+        {
+            var report = await _context.Reports.FindAsync(id);
+            if (report == null)
+                return NotFound();
+            report.FirmaAksiyon = firmaAksiyon;
+            report.FirmaNotu = firmaNotu;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("KurumTalepleri");
+        }
+
         [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public async Task<IActionResult> Raporlar()
         {

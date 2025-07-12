@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YetkiliyeBildir.Models;
 
@@ -11,9 +12,11 @@ using YetkiliyeBildir.Models;
 namespace YetkiliyeBildir.Migrations
 {
     [DbContext(typeof(YetkiliyeBildirContext))]
-    partial class YetkiliyeBildirContextModelSnapshot : ModelSnapshot
+    [Migration("20250712200220_ReportFirmaAksiyonVeNot")]
+    partial class ReportFirmaAksiyonVeNot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

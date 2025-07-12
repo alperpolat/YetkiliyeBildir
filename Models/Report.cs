@@ -33,5 +33,8 @@ namespace YetkiliyeBildir.Models
         public Authority? Authority { get; set; }
         public int? YetkiliKurumId { get; set; }
         public YetkiliKurum? YetkiliKurum { get; set; }
+
+        public string FirmaAksiyon { get; set; } // İşlemeAlındı, Reddedildi, Tamamlandı
+        public string FirmaNotu { get; set; }
     }
 } 

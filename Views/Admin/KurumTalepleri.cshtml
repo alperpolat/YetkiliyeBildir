@@ -13,6 +13,9 @@
                 <th>Açıklama</th>
                 <th>Durum</th>
                 <th>Oluşturulma Tarihi</th>
+                <th>Aksiyon</th>
+                <th>Not</th>
+                <th>İşlem</th>
                 @if (User.IsInRole("Admin"))
                 {
                     <th>Yetkili Kurum</th>
@@ -37,6 +40,33 @@
                         </span>
                     </td>
                     <td>@r.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                    <td>
+                        <span class="badge bg-secondary">@r.FirmaAksiyon</span>
+                    </td>
+                    <td>
+                        @r.FirmaNotu
+                    </td>
+                    <td>
+                        <form asp-action="KurumAksiyonGuncelle" method="post" class="d-flex flex-column gap-1">
+                            <input type="hidden" name="id" value="@r.Id" />
+                            <select name="firmaAksiyon" class="form-select form-select-sm mb-1">
+                                <option value="">Seçiniz</option>
+                                @foreach (var durum in new[] { "İşlemeAlındı", "Reddedildi", "Tamamlandı" })
+                                {
+                                    if (r.FirmaAksiyon == durum)
+                                    {
+                                        <option value="@durum" selected>@(durum == "İşlemeAlındı" ? "İşleme Alındı" : durum == "Reddedildi" ? "Reddedildi" : "Tamamlandı")</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@durum">@(durum == "İşlemeAlındı" ? "İşleme Alındı" : durum == "Reddedildi" ? "Reddedildi" : "Tamamlandı")</option>
+                                    }
+                                }
+                            </select>
+                            <textarea name="firmaNotu" class="form-control form-control-sm mb-1" rows="2" placeholder="Not ekleyin...">@r.FirmaNotu</textarea>
+                            <button type="submit" class="btn btn-primary btn-sm">Kaydet</button>
+                        </form>
+                    </td>
                     @if (User.IsInRole("Admin"))
                     {
                         <td>@(r.Authority?.Name ?? "Belirtilmemiş")</td>

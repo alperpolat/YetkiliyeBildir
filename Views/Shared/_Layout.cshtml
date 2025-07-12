@@ -35,6 +35,10 @@
                         </li>
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
+                            if (User.IsInRole("Admin") || User.IsInRole("Official") || User.IsInRole("KurumYetkilisi"))
+                            {
+                                <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="KurumTalepleri">Kurum Talepleri</a></li>
+                            }
                             if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="Index">Kullanıcı Yönetimi</a></li>
