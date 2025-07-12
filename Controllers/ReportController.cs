@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace YetkiliyeBildir.Controllers
 {
@@ -20,10 +21,29 @@ namespace YetkiliyeBildir.Controllers
         }
 
         // İhbarları listele
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var reports = _context.Reports.OrderByDescending(r => r.CreatedAt).ToList();
-            return View(reports);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+            IQueryable<Report> reports = _context.Reports.OrderByDescending(r => r.CreatedAt);
+
+            if (User.IsInRole("Admin"))
+            {
+                // Admin tüm ihbarları görebilir
+                return View(await reports.ToListAsync());
+            }
+            else if (user != null && user.YetkiliKurumId != null)
+            {
+                // Kurum personeli sadece kendi kurumunun ihbarlarını görür
+                reports = reports.Where(r => r.YetkiliKurumId == user.YetkiliKurumId);
+                return View(await reports.ToListAsync());
+            }
+            else
+            {
+                // Vatandaş ise sadece kendi oluşturduğu ihbarları görsün (Report modelinde UserId varsa)
+                // reports = reports.Where(r => r.UserId == user.Id);
+                // return View(await reports.ToListAsync());
+                return View(new List<Report>()); // UserId yoksa boş liste döndür
+            }
         }
 
         // İhbar ekleme formu (GET)
