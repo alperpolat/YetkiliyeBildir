@@ -1,8 +1,9 @@
 @model List<YetkiliyeBildir.Models.Report>
 @{
-    ViewData["Title"] = "Kurum Talepleri";
+    ViewData["Title"] = "Raporlar";
 }
-<h2>Kurum Talepleri</h2>
+
+<h2>Raporlar</h2>
 
 @if (Model.Any())
 {
@@ -20,26 +21,26 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var r in Model)
+            @foreach (var report in Model)
             {
                 <tr>
-                    <td>@r.Category</td>
-                    <td>@r.Description</td>
+                    <td>@report.Category</td>
+                    <td>@report.Description</td>
                     <td>
-                        <span class="badge @(r.Status.ToString() switch {
+                        <span class="badge @(report.Status.ToString() switch {
                             "Beklemede" => "bg-warning",
                             "İşlemeAlındı" => "bg-info", 
                             "Tamamlandı" => "bg-success",
                             "Reddedildi" => "bg-danger",
                             _ => "bg-secondary"
                         })">
-                            @r.Status
+                            @report.Status
                         </span>
                     </td>
-                    <td>@r.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                    <td>@report.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
                     @if (User.IsInRole("Admin"))
                     {
-                        <td>@(r.Authority?.Name ?? "Belirtilmemiş")</td>
+                        <td>@(report.Authority?.Name ?? "Belirtilmemiş")</td>
                     }
                 </tr>
             }
@@ -49,7 +50,7 @@
 else
 {
     <div class="alert alert-info">
-        <h4>Henüz talep bulunmuyor</h4>
-        <p>Gösterilecek talep bulunamadı.</p>
+        <h4>Henüz rapor bulunmuyor</h4>
+        <p>Gösterilecek rapor bulunamadı.</p>
     </div>
 } 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace YetkiliyeBildir.Controllers
 {
@@ -142,12 +143,63 @@ namespace YetkiliyeBildir.Controllers
         public async Task<IActionResult> KurumTalepleri()
         {
             var currentUser = await _userManager.GetUserAsync(User);
-            if (currentUser == null || currentUser.YetkiliKurumId == null)
+            if (currentUser == null)
                 return Unauthorized();
-            var talepler = await _context.Reports
-                .Where(r => r.AuthorityId == currentUser.YetkiliKurumId)
-                .ToListAsync();
+
+            List<Report> talepler;
+            
+            if (User.IsInRole("Admin"))
+            {
+                // Admin tüm kurumların taleplerini görebilir
+                talepler = await _context.Reports
+                    .Include(r => r.Authority)
+                    .OrderByDescending(r => r.CreatedAt)
+                    .ToListAsync();
+            }
+            else
+            {
+                // Diğer kullanıcılar sadece kendi kurumlarının taleplerini görebilir
+                if (currentUser.YetkiliKurumId == null)
+                    return Unauthorized();
+                    
+                talepler = await _context.Reports
+                    .Where(r => r.AuthorityId == currentUser.YetkiliKurumId)
+                    .ToListAsync();
+            }
+            
             return View(talepler);
+        }
+
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
+        public async Task<IActionResult> Raporlar()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+                return Unauthorized();
+
+            List<Report> reports;
+            
+            if (User.IsInRole("Admin"))
+            {
+                // Admin tüm raporları görebilir
+                reports = await _context.Reports
+                    .Include(r => r.Authority)
+                    .OrderByDescending(r => r.CreatedAt)
+                    .ToListAsync();
+            }
+            else
+            {
+                // Diğer kullanıcılar sadece kendi kurumlarının raporlarını görebilir
+                if (currentUser.YetkiliKurumId == null)
+                    return Unauthorized();
+                    
+                reports = await _context.Reports
+                    .Where(r => r.AuthorityId == currentUser.YetkiliKurumId)
+                    .OrderByDescending(r => r.CreatedAt)
+                    .ToListAsync();
+            }
+            
+            return View(reports);
         }
     }
 } 
