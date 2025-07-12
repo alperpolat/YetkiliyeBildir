@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Yetkili Başvuruları";
 }
-<h2>Bekleyen Yetkili Başvuruları</h2>
+<h2>Tüm Yetkili Başvuruları</h2>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -10,6 +10,7 @@
             <th>Ad Soyad</th>
             <th>Telefon</th>
             <th>E-posta</th>
+            <th>Durum</th>
             <th>İşlem</th>
         </tr>
     </thead>
@@ -22,13 +23,23 @@
                 <td>@user.Telefon</td>
                 <td>@user.Email</td>
                 <td>
+                    <span class="badge @(user.CheckStatus switch {
+                        "Beklemede" => "bg-warning",
+                        "Onaylandı" => "bg-success",
+                        "Reddedildi" => "bg-danger",
+                        _ => "bg-secondary"
+                    })">
+                        @user.CheckStatus
+                    </span>
+                </td>
+                <td>
                     <form asp-action="YetkiliOnayla" method="post" style="display:inline">
                         <input type="hidden" name="userId" value="@user.Id" />
-                        <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                        <button type="submit" class="btn btn-success btn-sm" @(user.CheckStatus == "Onaylandı" ? "disabled" : "")>Onayla</button>
                     </form>
                     <form asp-action="YetkiliReddet" method="post" style="display:inline">
                         <input type="hidden" name="userId" value="@user.Id" />
-                        <button type="submit" class="btn btn-danger btn-sm">Reddet</button>
+                        <button type="submit" class="btn btn-danger btn-sm" @(user.CheckStatus == "Reddedildi" ? "disabled" : "")>Reddet</button>
                     </form>
                 </td>
             </tr>

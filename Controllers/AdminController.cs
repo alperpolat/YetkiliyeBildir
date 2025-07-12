@@ -62,10 +62,11 @@ namespace YetkiliyeBildir.Controllers
         [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public async Task<IActionResult> YetkiliBasvurular()
         {
-            var bekleyenler = await _context.Users.Include(u => u.YetkiliKurum)
-                .Where(u => u.CheckStatus == "Beklemede" && u.YetkiliKurumId != null)
+            var tumYetkililer = await _context.Users
+                .Include(u => u.YetkiliKurum)
+                .Where(u => u.YetkiliKurumId != null)
                 .ToListAsync();
-            return View(bekleyenler);
+            return View(tumYetkililer);
         }
 
         [HttpPost]
