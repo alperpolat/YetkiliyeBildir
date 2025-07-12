@@ -1,7 +1,7 @@
 @model YetkiliyeBildir.Models.Report
 @{
     ViewData["Title"] = "İhbar Ekle";
-    var categories = ViewBag.Categories as string[];
+    var categories = ViewBag.Categories as IEnumerable<string> ?? new List<string>();
     var authorities = ViewBag.Authorities as List<YetkiliyeBildir.Models.Authority>;
     var kurumlar = ViewBag.YetkiliKurumlar as List<YetkiliyeBildir.Models.YetkiliKurum>;
 }
