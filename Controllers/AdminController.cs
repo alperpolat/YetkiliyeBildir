@@ -126,7 +126,7 @@ namespace YetkiliyeBildir.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Official")]
+        [Authorize(Roles = "Official,KurumYetkilisi")]
         public async Task<IActionResult> KurumPersonelleri()
         {
             var currentUser = await _userManager.GetUserAsync(User);
@@ -138,7 +138,7 @@ namespace YetkiliyeBildir.Controllers
             return View(personeller);
         }
 
-        [Authorize(Roles = "Official,KurumYetkilisi")]
+        [Authorize(Roles = "Official,KurumYetkilisi,Admin")]
         public async Task<IActionResult> KurumTalepleri()
         {
             var currentUser = await _userManager.GetUserAsync(User);
