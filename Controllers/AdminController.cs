@@ -170,7 +170,7 @@ namespace YetkiliyeBildir.Controllers
                     return Unauthorized();
                     
                 talepler = await _context.Reports
-                    .Where(r => r.AuthorityId == currentUser.YetkiliKurumId)
+                    .Where(r => r.YetkiliKurumId == currentUser.YetkiliKurumId)
                     .ToListAsync();
             }
             
@@ -214,7 +214,7 @@ namespace YetkiliyeBildir.Controllers
                     return Unauthorized();
                     
                 reports = await _context.Reports
-                    .Where(r => r.AuthorityId == currentUser.YetkiliKurumId)
+                    .Where(r => r.YetkiliKurumId == currentUser.YetkiliKurumId)
                     .OrderByDescending(r => r.CreatedAt)
                     .ToListAsync();
             }

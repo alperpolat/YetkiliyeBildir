@@ -58,7 +58,10 @@
                             else // Vatandaş
                             {
                                 <li class="nav-item"><a class="nav-link" asp-controller="Report" asp-action="Create">Bildirim Oluştur</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-controller="Report" asp-action="Index">Bildirimlerim</a></li>
+                                @if (User.IsInRole("User"))
+                                {
+                                    <li class="nav-item"><a class="nav-link" asp-controller="Report" asp-action="Index">Bildirimlerim</a></li>
+                                }
                             }
                             <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Profile">Profilim</a></li>
                         }
