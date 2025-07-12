@@ -9,7 +9,6 @@ using System.Collections.Generic;
 
 namespace YetkiliyeBildir.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -21,6 +20,7 @@ namespace YetkiliyeBildir.Controllers
         }
 
         // İhbarları listele
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public IActionResult Index()
         {
             var reports = _context.Reports.OrderByDescending(r => r.CreatedAt).ToList();
@@ -28,6 +28,7 @@ namespace YetkiliyeBildir.Controllers
         }
 
         // İhbar detay
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public IActionResult Details(int id)
         {
             var report = _context.Reports.FirstOrDefault(r => r.Id == id);
@@ -36,6 +37,7 @@ namespace YetkiliyeBildir.Controllers
         }
 
         // Durum güncelle (GET)
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public IActionResult Edit(int id)
         {
             var report = _context.Reports.FirstOrDefault(r => r.Id == id);
@@ -47,6 +49,7 @@ namespace YetkiliyeBildir.Controllers
         // Durum güncelle (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public async Task<IActionResult> Edit(int id, ReportStatus Status)
         {
             var report = _context.Reports.FirstOrDefault(r => r.Id == id);
@@ -56,6 +59,7 @@ namespace YetkiliyeBildir.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public async Task<IActionResult> YetkiliBasvurular()
         {
             var bekleyenler = await _context.Users.Include(u => u.YetkiliKurum)
@@ -65,6 +69,7 @@ namespace YetkiliyeBildir.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public async Task<IActionResult> YetkiliOnayla(string userId)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
@@ -78,6 +83,7 @@ namespace YetkiliyeBildir.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public async Task<IActionResult> YetkiliReddet(string userId)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
@@ -139,7 +145,7 @@ namespace YetkiliyeBildir.Controllers
             return View(personeller);
         }
 
-        [Authorize(Roles = "Official,KurumYetkilisi,Admin")]
+        [Authorize(Roles = "Admin,Official,KurumYetkilisi")]
         public async Task<IActionResult> KurumTalepleri()
         {
             var currentUser = await _userManager.GetUserAsync(User);
