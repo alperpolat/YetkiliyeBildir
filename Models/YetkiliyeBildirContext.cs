@@ -10,5 +10,6 @@ namespace YetkiliyeBildir.Models
         public DbSet<Report> Reports { get; set; }
         public DbSet<Authority> Authorities { get; set; }
         public DbSet<YetkiliKurum> YetkiliKurumlar { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 } 

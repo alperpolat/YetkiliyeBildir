@@ -29,16 +29,7 @@ namespace YetkiliyeBildir.Controllers
         // İhbar ekleme formu (GET)
         public IActionResult Create()
         {
-            ViewBag.Categories = new[]
-            {
-                "Terk edilmiş scooter/bisiklet",
-                "Çukur, bozuk yol, kaldırım",
-                "Yanık sokak lambası",
-                "Aşırı dolu çöp kutusu",
-                "Hasarlı trafik tabelası",
-                "Güvensiz yapı/bariyer",
-                "Kaybolmuş hayvan"
-            };
+            ViewBag.Categories = _context.Categories.Select(c => c.Name).ToList();
             ViewBag.Authorities = _context.Authorities.ToList();
             ViewBag.YetkiliKurumlar = _context.YetkiliKurumlar.ToList();
             return View();
@@ -79,16 +70,7 @@ namespace YetkiliyeBildir.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.Categories = new[]
-            {
-                "Terk edilmiş scooter/bisiklet",
-                "Çukur, bozuk yol, kaldırım",
-                "Yanık sokak lambası",
-                "Aşırı dolu çöp kutusu",
-                "Hasarlı trafik tabelası",
-                "Güvensiz yapı/bariyer",
-                "Kaybolmuş hayvan"
-            };
+            ViewBag.Categories = _context.Categories.Select(c => c.Name).ToList();
             ViewBag.Authorities = _context.Authorities.ToList();
             ViewBag.YetkiliKurumlar = _context.YetkiliKurumlar.ToList();
             return View(report);

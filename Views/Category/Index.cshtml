@@ -1,0 +1,26 @@
+@model IEnumerable<YetkiliyeBildir.Models.Category>
+@{
+    ViewData["Title"] = "Kategori Yönetimi";
+}
+<h2>Kategori Yönetimi</h2>
+<a class="btn btn-primary mb-3" asp-action="Create">Yeni Kategori Ekle</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Adı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 
