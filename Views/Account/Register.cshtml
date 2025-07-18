@@ -1,34 +1,38 @@
 @{
     ViewData["Title"] = "Kayıt Ol";
 }
-<h2>Kayıt Ol</h2>
-<form asp-action="Register" method="post">
-    <div class="form-group">
-        <label for="adSoyad">Ad Soyad</label>
-        <input type="text" class="form-control" id="adSoyad" name="adSoyad" required />
+<div class="monster-section d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="monster-card" style="max-width: 440px; width: 100%; margin: 0 auto;">
+        <h2 class="fw-bold text-center mb-4">Kayıt Ol</h2>
+        <form asp-action="Register" method="post">
+            <div class="mb-3">
+                <label for="adSoyad" class="form-label">Ad Soyad</label>
+                <input type="text" class="form-control" id="adSoyad" name="adSoyad" required />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-posta</label>
+                <input type="email" class="form-control" id="email" name="email" required />
+            </div>
+            <div class="mb-3">
+                <label for="telefon" class="form-label">Telefon (opsiyonel)</label>
+                <input type="text" class="form-control" id="telefon" name="telefon" />
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Şifre</label>
+                <input type="password" class="form-control" id="password" name="password" required />
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-2">Kayıt Ol</button>
+        </form>
+        <hr />
+        <form asp-action="GoogleLogin" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger w-100">Google ile Kayıt Ol</button>
+        </form>
+        <div class="text-danger mt-2">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
     </div>
-    <div class="form-group">
-        <label for="email">E-posta</label>
-        <input type="email" class="form-control" id="email" name="email" required />
-    </div>
-    <div class="form-group">
-        <label for="telefon">Telefon (opsiyonel)</label>
-        <input type="text" class="form-control" id="telefon" name="telefon" />
-    </div>
-    <div class="form-group">
-        <label for="password">Şifre</label>
-        <input type="password" class="form-control" id="password" name="password" required />
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Kayıt Ol</button>
-    <hr />
-    <form asp-action="GoogleLogin" method="post">
-        @Html.AntiForgeryToken()
-        <button type="submit" class="btn btn-danger">Google ile Kayıt Ol</button>
-    </form>
-    <div class="text-danger">
-        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-        {
-            <div>@error.ErrorMessage</div>
-        }
-    </div>
-</form> 
+</div> 

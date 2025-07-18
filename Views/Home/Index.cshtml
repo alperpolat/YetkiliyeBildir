@@ -1,74 +1,99 @@
 ﻿@{
     ViewData["Title"] = "YetkiliyeBildir - Anasayfa";
 }
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="text-center mb-4">
-                <h1 class="display-5">YetkiliyeBildir.com</h1>
-                <p class="lead">Vatandaş ile yetkili kurumları buluşturan, sorunların hızlıca çözülmesini sağlayan dijital platform.</p>
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="10" fill="#f8d568"/>
-                  <path d="M8 12l2 2 4-4" stroke="#2d7a2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+<style>
+.hero-bg-monster {
+    width: 100vw;
+    min-height: 420px;
+    background: linear-gradient(120deg, #181818 60%, #232323 100%);
+    position: relative;
+    margin-left: calc(-1 * ((100vw - 100%) / 2));
+    margin-right: calc(-1 * ((100vw - 100%) / 2));
+    padding: 64px 0 32px 0;
+    overflow: hidden;
+}
+.hero-bg-monster::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+    opacity: 0.08;
+    pointer-events: none;
+}
+.hero-icon-anim {
+    display: inline-block;
+    animation: monster-bounce 1.5s infinite alternate;
+}
+@@keyframes monster-bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-18px); }
+}
+</style>
+<div class="hero-bg-monster text-center">
+    <h1 class="display-2 fw-bold mb-3 animate-pop" style="color:#fff;">YetkiliyeBildir.com</h1>
+    <p class="lead mb-4 animate-fade" style="color:#fff; font-size:1.5rem;">Vatandaş ile yetkili kurumları buluşturan, sorunların hızlıca çözülmesini sağlayan dijital platform.</p>
+    <span class="hero-icon-anim">
+        <svg width="100" height="100" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#f8d568"/><path d="M8 12l2 2 4-4" stroke="#2d7a2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+</div>
+<div class="monster-card animate-fade mb-4" style="max-width: 1200px; margin: 32px auto 0 auto; background: #232323; color: #fff;">
+    <h4 class="mb-3 fw-bold"><span class="step-icon me-2">?</span>Nasıl Çalışır?</h4>
+    <div class="row g-3">
+        <div class="col-md-6 col-lg-3">
+            <div class="step-card text-center p-3 h-100">
+                <div class="step-circle mb-2">1</div>
+                <div class="mb-2 step-svg"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2" fill="#e0e7ef"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#3b82f6" stroke-width="2"/></svg></div>
+                <div>Sorunu veya ihbarı kolayca bildir.</div>
             </div>
-            <div class="card mb-4 spotify-card">
-                <div class="card-body">
-                    <h4 class="card-title">Nasıl Çalışır?</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-2 d-flex align-items-center">
-                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" class="me-2"><rect x="3" y="11" width="18" height="10" rx="2" fill="#e0e7ef"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#3b82f6" stroke-width="2"/></svg>
-                            Sorunu veya ihbarı kolayca bildir.
-                        </li>
-                        <li class="mb-2 d-flex align-items-center">
-                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" class="me-2"><circle cx="12" cy="12" r="10" fill="#f3f4f6"/><path d="M12 8v4l3 3" stroke="#f59e42" stroke-width="2"/></svg>
-                            Konum ve fotoğraf ekle, açıklama yaz.
-                        </li>
-                        <li class="mb-2 d-flex align-items-center">
-                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" class="me-2"><rect x="4" y="4" width="16" height="16" rx="4" fill="#e0f2fe"/><path d="M8 12l2 2 4-4" stroke="#0ea5e9" stroke-width="2"/></svg>
-                            Bildirimin ilgili kuruma otomatik iletilir.
-                        </li>
-                        <li class="mb-2 d-flex align-items-center">
-                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" class="me-2"><circle cx="12" cy="12" r="10" fill="#fef9c3"/><path d="M8 12h8" stroke="#eab308" stroke-width="2"/></svg>
-                            Yetkililer ihbarı panelden yönetir ve çözüme kavuşturur.
-                        </li>
-                    </ul>
-                </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="step-card text-center p-3 h-100">
+                <div class="step-circle mb-2">2</div>
+                <div class="mb-2 step-svg"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#f3f4f6"/><path d="M12 8v4l3 3" stroke="#f59e42" stroke-width="2"/></svg></div>
+                <div>Konum ve fotoğraf ekle, açıklama yaz.</div>
             </div>
-            <div class="row mb-4">
-                <div class="col-md-6 mb-2">
-                    <div class="card h-100 text-center spotify-card">
-                        <div class="card-body">
-                            <svg width="40" height="40" fill="none" viewBox="0 0 24 24" class="mb-2"><circle cx="12" cy="12" r="10" fill="#e0e7ef"/><path d="M12 7v5l3 3" stroke="#3b82f6" stroke-width="2"/></svg>
-                            <h5 class="card-title">Vatandaşlar için</h5>
-                            <ul class="list-unstyled">
-                                <li>Hızlı ve kolay bildirim</li>
-                                <li>Takip edilebilir süreç</li>
-                                <li>Gizlilik ve güvenlik</li>
-                            </ul>
-                            <a class="btn btn-primary" href="/Account/Register">Kayıt Ol</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <div class="card h-100 text-center spotify-card">
-                        <div class="card-body">
-                            <svg width="40" height="40" fill="none" viewBox="0 0 24 24" class="mb-2"><rect x="4" y="4" width="16" height="16" rx="4" fill="#e0f2fe"/><path d="M8 12l2 2 4-4" stroke="#0ea5e9" stroke-width="2"/></svg>
-                            <h5 class="card-title">Kurumlar için</h5>
-                            <ul class="list-unstyled">
-                                <li>Gelen ihbarları panelden yönet</li>
-                                <li>Personel ekle, talepleri paylaş</li>
-                                <li>Çözüm ve raporlama kolaylığı</li>
-                            </ul>
-                            <a class="btn btn-warning" href="/Account/YetkiliRegister">Yetkili olmak için tıklayın</a>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="step-card text-center p-3 h-100">
+                <div class="step-circle mb-2">3</div>
+                <div class="mb-2 step-svg"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" fill="#e0f2fe"/><path d="M8 12l2 2 4-4" stroke="#0ea5e9" stroke-width="2"/></svg></div>
+                <div>Bildirimin ilgili kuruma otomatik iletilir.</div>
             </div>
-            <div class="alert alert-info text-center spotify-card">
-                <svg width="32" height="32" fill="none" viewBox="0 0 24 24" class="me-2 align-middle"><circle cx="12" cy="12" r="10" fill="#f8fafc"/><path d="M8 12l2 2 4-4" stroke="#2d7a2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <b>YetkiliyeBildir</b> ile şehirlerimiz daha güvenli, daha düzenli!
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="step-card text-center p-3 h-100">
+                <div class="step-circle mb-2">4</div>
+                <div class="mb-2 step-svg"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fef9c3"/><path d="M8 12h8" stroke="#eab308" stroke-width="2"/></svg></div>
+                <div>Yetkililer ihbarı panelden yönetir ve çözüme kavuşturur.</div>
             </div>
         </div>
     </div>
+</div>
+<div class="row mb-4 g-4" style="max-width: 1200px; margin: 0 auto;">
+    <div class="col-md-6">
+        <div class="monster-card animate-pop text-center" style="background: #232323; color: #fff;">
+            <h5 class="card-title">Vatandaşlar için</h5>
+            <ul class="list-unstyled mb-3">
+                <li>Hızlı ve kolay bildirim</li>
+                <li>Takip edilebilir süreç</li>
+                <li>Gizlilik ve güvenlik</li>
+            </ul>
+            <a class="btn btn-primary btn-lg px-4" href="/Account/Register">Kayıt Ol</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="monster-card animate-pop text-center" style="background: #232323; color: #fff;">
+            <h5 class="card-title">Kurumlar için</h5>
+            <ul class="list-unstyled mb-3">
+                <li>Gelen ihbarları panelden yönet</li>
+                <li>Personel ekle, talepleri paylaş</li>
+                <li>Çözüm ve raporlama kolaylığı</li>
+            </ul>
+            <a class="btn btn-warning btn-lg px-4" href="/Account/YetkiliRegister">Yetkili olmak için tıklayın</a>
+        </div>
+    </div>
+</div>
+<div class="monster-card text-center animate-fade mb-0" style="max-width: 1200px; margin: 32px auto 0 auto; border: 1.5px solid #1DB954; background: #232323; color: #fff; font-size: 1.18rem; font-weight: 600;">
+    <span style="font-size:1.5rem; vertical-align:middle; color:#1DB954; margin-right:0.5rem;">&#10003;</span>
+    <span><b>YetkiliyeBildir</b> ile şehirlerimiz daha güvenli, daha düzenli!</span>
 </div>

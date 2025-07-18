@@ -5,69 +5,73 @@
     var authorities = ViewBag.Authorities as List<YetkiliyeBildir.Models.Authority>;
     var kurumlar = ViewBag.YetkiliKurumlar as List<YetkiliyeBildir.Models.YetkiliKurum>;
 }
-<h2>İhbar Ekle</h2>
-<form asp-action="Create" enctype="multipart/form-data" method="post">
-    <div class="mb-3">
-        <label asp-for="Category" class="form-label">Kategori</label>
-        <select asp-for="Category" class="form-select" required>
-            <option value="">Seçiniz</option>
-            @foreach (var cat in categories)
-            {
-                <option value="@cat">@cat</option>
-            }
-        </select>
-        <span asp-validation-for="Category" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label">Açıklama</label>
-        <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Yetkili Kurum Seçimi</label>
-        <div class="row">
-            <div class="col-md-6">
-                <label class="form-label">Klasik Yetkili Kurumlar</label>
-                <select name="selectedAuthorityId" class="form-select">
+<div class="monster-section d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="monster-card" style="max-width: 600px; width: 100%; margin: 0 auto;">
+        <h2 class="fw-bold text-center mb-4">İhbar Ekle</h2>
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <div class="mb-3">
+                <label asp-for="Category" class="form-label">Kategori</label>
+                <select asp-for="Category" class="form-select" required>
                     <option value="">Seçiniz</option>
-                    @foreach (var a in authorities)
+                    @foreach (var cat in categories)
                     {
-                        <option value="@a.Id">@a.Name</option>
+                        <option value="@cat">@cat</option>
                     }
                 </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
             </div>
-            <div class="col-md-6">
-                <label class="form-label">Platforma Kayıtlı Kurumlar</label>
-                <select name="selectedYetkiliKurumId" class="form-select">
-                    <option value="">Seçiniz</option>
-                    @foreach (var k in kurumlar)
-                    {
-                        <option value="@k.Id">@k.KurumAdi</option>
-                    }
-                </select>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Açıklama</label>
+                <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-        </div>
-        <small class="text-muted">Bir kurum seçmek zorunludur. (Sadece birini seçiniz)</small>
+            <div class="mb-3">
+                <label class="form-label">Yetkili Kurum Seçimi</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">Klasik Yetkili Kurumlar</label>
+                        <select name="selectedAuthorityId" class="form-select">
+                            <option value="">Seçiniz</option>
+                            @foreach (var a in authorities)
+                            {
+                                <option value="@a.Id">@a.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Platforma Kayıtlı Kurumlar</label>
+                        <select name="selectedYetkiliKurumId" class="form-select">
+                            <option value="">Seçiniz</option>
+                            @foreach (var k in kurumlar)
+                            {
+                                <option value="@k.Id">@k.KurumAdi</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <small class="text-muted">Bir kurum seçmek zorunludur. (Sadece birini seçiniz)</small>
+            </div>
+            <div class="mb-3 row">
+                <div class="col">
+                    <label asp-for="Latitude" class="form-label">Enlem (Lat)</label>
+                    <input asp-for="Latitude" class="form-control" step="any" />
+                </div>
+                <div class="col">
+                    <label asp-for="Longitude" class="form-label">Boylam (Lng)</label>
+                    <input asp-for="Longitude" class="form-control" step="any" />
+                </div>
+                <div class="col-auto align-self-end">
+                    <button type="button" class="btn btn-outline-secondary" onclick="getLocation()">Konumumu Al</button>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fotoğraf</label>
+                <input type="file" name="photo" class="form-control" accept="image/*" />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">İhbarı Gönder</button>
+        </form>
     </div>
-    <div class="mb-3 row">
-        <div class="col">
-            <label asp-for="Latitude" class="form-label">Enlem (Lat)</label>
-            <input asp-for="Latitude" class="form-control" step="any" />
-        </div>
-        <div class="col">
-            <label asp-for="Longitude" class="form-label">Boylam (Lng)</label>
-            <input asp-for="Longitude" class="form-control" step="any" />
-        </div>
-        <div class="col-auto align-self-end">
-            <button type="button" class="btn btn-outline-secondary" onclick="getLocation()">Konumumu Al</button>
-        </div>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Fotoğraf</label>
-        <input type="file" name="photo" class="form-control" accept="image/*" />
-    </div>
-    <button type="submit" class="btn btn-primary">Gönder</button>
-</form>
+</div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>

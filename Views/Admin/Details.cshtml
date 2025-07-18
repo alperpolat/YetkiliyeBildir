@@ -2,33 +2,35 @@
 @{
     ViewData["Title"] = "İhbar Detayı";
 }
-<h2>İhbar Detayı</h2>
-<div class="card">
-    <div class="card-body">
-        <dl class="row">
-            <dt class="col-sm-3">Kategori</dt>
-            <dd class="col-sm-9">@Model.Category</dd>
-            <dt class="col-sm-3">Açıklama</dt>
-            <dd class="col-sm-9">@Model.Description</dd>
-            <dt class="col-sm-3">Durum</dt>
-            <dd class="col-sm-9">@Model.Status</dd>
-            <dt class="col-sm-3">Tarih</dt>
-            <dd class="col-sm-9">@Model.CreatedAt.ToString("g")</dd>
-            <dt class="col-sm-3">Fotoğraf</dt>
-            <dd class="col-sm-9">
+<div class="monster-section d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="monster-card" style="max-width: 600px; width: 100%; margin: 0 auto;">
+        <h2 class="fw-bold text-center mb-4">İhbar Detayı</h2>
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Kategori</dt>
+            <dd class="col-sm-8">@Model.Category</dd>
+            <dt class="col-sm-4">Açıklama</dt>
+            <dd class="col-sm-8">@Model.Description</dd>
+            <dt class="col-sm-4">Durum</dt>
+            <dd class="col-sm-8">@Model.Status</dd>
+            <dt class="col-sm-4">Tarih</dt>
+            <dd class="col-sm-8">@Model.CreatedAt.ToString("g")</dd>
+            <dt class="col-sm-4">Fotoğraf</dt>
+            <dd class="col-sm-8">
                 @if (!string.IsNullOrEmpty(Model.PhotoPath))
                 {
-                    <img src="@Model.PhotoPath" alt="Fotoğraf" width="200" />
+                    <img src="@Model.PhotoPath" alt="Fotoğraf" width="200" class="rounded shadow-sm" />
                 }
             </dd>
-            <dt class="col-sm-3">Konum</dt>
-            <dd class="col-sm-9">
+            <dt class="col-sm-4">Konum</dt>
+            <dd class="col-sm-8">
                 @if (Model.Latitude != null && Model.Longitude != null)
                 {
                     <a href="https://www.google.com/maps?q=@Model.Latitude,@Model.Longitude" target="_blank">Haritada Göster</a>
                 }
             </dd>
         </dl>
-        <a class="btn btn-secondary" asp-action="Index">Geri</a>
+        <div class="text-center mt-4">
+            <a class="btn btn-secondary" asp-action="Index">Geri</a>
+        </div>
     </div>
 </div> 

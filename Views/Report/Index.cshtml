@@ -2,44 +2,50 @@
 @{
     ViewData["Title"] = "İhbarlar";
 }
-<h2>İhbarlar</h2>
-<a class="btn btn-success mb-3" asp-action="Create">Yeni İhbar</a>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Kategori</th>
-            <th>Açıklama</th>
-            <th>Durum</th>
-            <th>Tarih</th>
-            <th>Fotoğraf</th>
-            <th>Konum</th>
-            <th>Firma Aksiyonu</th>
-            <th>Firma Notu</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Category</td>
-                <td>@item.Description</td>
-                <td>@item.Status</td>
-                <td>@item.CreatedAt.ToString("g")</td>
-                <td>
-                    @if (!string.IsNullOrEmpty(item.PhotoPath))
-                    {
-                        <img src="@item.PhotoPath" alt="Fotoğraf" width="80" />
-                    }
-                </td>
-                <td>
-                    @if (item.Latitude != null && item.Longitude != null)
-                    {
-                        <a href="https://www.google.com/maps?q=@item.Latitude,@item.Longitude" target="_blank">Haritada Göster</a>
-                    }
-                </td>
-                <td>@item.FirmaAksiyon</td>
-                <td>@item.FirmaNotu</td>
-            </tr>
-        }
-    </tbody>
-</table> 
+<div class="monster-section">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold mb-0">İhbarlar</h2>
+        <a class="btn btn-success" asp-action="Create">Yeni İhbar</a>
+    </div>
+    <div class="monster-card p-0">
+        <table class="table table-bordered table-striped mb-0" style="border-radius: 12px; overflow: hidden;">
+            <thead class="table-light">
+                <tr>
+                    <th>Kategori</th>
+                    <th>Açıklama</th>
+                    <th>Durum</th>
+                    <th>Tarih</th>
+                    <th>Fotoğraf</th>
+                    <th>Konum</th>
+                    <th>Firma Aksiyonu</th>
+                    <th>Firma Notu</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Category</td>
+                        <td>@item.Description</td>
+                        <td>@item.Status</td>
+                        <td>@item.CreatedAt.ToString("g")</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.PhotoPath))
+                            {
+                                <img src="@item.PhotoPath" alt="Fotoğraf" width="80" />
+                            }
+                        </td>
+                        <td>
+                            @if (item.Latitude != null && item.Longitude != null)
+                            {
+                                <a href="https://www.google.com/maps?q=@item.Latitude,@item.Longitude" target="_blank">Haritada Göster</a>
+                            }
+                        </td>
+                        <td>@item.FirmaAksiyon</td>
+                        <td>@item.FirmaNotu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 
