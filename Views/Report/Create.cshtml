@@ -5,11 +5,11 @@
     var authorities = ViewBag.Authorities as List<YetkiliyeBildir.Models.Authority>;
     var kurumlar = ViewBag.YetkiliKurumlar as List<YetkiliyeBildir.Models.YetkiliKurum>;
 }
-<h2>İhbar Ekle</h2>
-<form asp-action="Create" enctype="multipart/form-data" method="post">
+<h2 class="fw-bold mb-4 text-theme" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:700;">İhbar Ekle</h2>
+<form asp-action="Create" enctype="multipart/form-data" method="post" class="bg-white rounded-4 shadow p-4">
     <div class="mb-3">
-        <label asp-for="Category" class="form-label">Kategori</label>
-        <select asp-for="Category" class="form-select" required>
+        <label asp-for="Category" class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Kategori</label>
+        <select asp-for="Category" class="form-select fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;" required>
             <option value="">Seçiniz</option>
             @foreach (var cat in categories)
             {
@@ -19,16 +19,16 @@
         <span asp-validation-for="Category" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Description" class="form-label">Açıklama</label>
-        <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+        <label asp-for="Description" class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Açıklama</label>
+        <textarea asp-for="Description" class="form-control fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;" rows="3" required></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label class="form-label">Yetkili Kurum Seçimi</label>
+        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Yetkili Kurum Seçimi</label>
         <div class="row">
             <div class="col-md-6">
-                <label class="form-label">Klasik Yetkili Kurumlar</label>
-                <select name="selectedAuthorityId" class="form-select">
+                <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Klasik Yetkili Kurumlar</label>
+                <select name="selectedAuthorityId" class="form-select fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;">
                     <option value="">Seçiniz</option>
                     @foreach (var a in authorities)
                     {
@@ -37,8 +37,8 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label class="form-label">Platforma Kayıtlı Kurumlar</label>
-                <select name="selectedYetkiliKurumId" class="form-select">
+                <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Platforma Kayıtlı Kurumlar</label>
+                <select name="selectedYetkiliKurumId" class="form-select fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;">
                     <option value="">Seçiniz</option>
                     @foreach (var k in kurumlar)
                     {
@@ -47,26 +47,26 @@
                 </select>
             </div>
         </div>
-        <small class="text-muted">Bir kurum seçmek zorunludur. (Sadece birini seçiniz)</small>
+        <small class="text-muted" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:13px;">Bir kurum seçmek zorunludur. (Sadece birini seçiniz)</small>
     </div>
     <div class="mb-3 row">
         <div class="col">
-            <label asp-for="Latitude" class="form-label">Enlem (Lat)</label>
-            <input asp-for="Latitude" class="form-control" step="any" />
+            <label asp-for="Latitude" class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Enlem (Lat)</label>
+            <input asp-for="Latitude" class="form-control fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;" step="any" />
         </div>
         <div class="col">
-            <label asp-for="Longitude" class="form-label">Boylam (Lng)</label>
-            <input asp-for="Longitude" class="form-control" step="any" />
+            <label asp-for="Longitude" class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Boylam (Lng)</label>
+            <input asp-for="Longitude" class="form-control fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;" step="any" />
         </div>
         <div class="col-auto align-self-end">
-            <button type="button" class="btn btn-outline-secondary" onclick="getLocation()">Konumumu Al</button>
+            <button type="button" class="btn btn-outline-secondary fw-bold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;" onclick="getLocation()">Konumumu Al</button>
         </div>
     </div>
     <div class="mb-3">
-        <label class="form-label">Fotoğraf</label>
-        <input type="file" name="photo" class="form-control" accept="image/*" />
+        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Fotoğraf</label>
+        <input type="file" name="photo" class="form-control fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;" accept="image/*" />
     </div>
-    <button type="submit" class="btn btn-primary">Gönder</button>
+    <button type="submit" class="btn btn-theme fw-bold rounded-pill px-4" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Gönder</button>
 </form>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -7,6 +7,45 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\package.json" />
+    <Content Include="wwwroot\assets\plugins\jszip\node_modules\safe-buffer\package.json" />
+    <Content Include="wwwroot\assets\plugins\jszip\node_modules\string_decoder\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\img\.DS_Store" />
+    <None Include="wwwroot\assets\img\ai\.DS_Store" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\CONTRIBUTING.md" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\doc\wg-meetings\2015-01-30.md" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\duplex-browser.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\duplex.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\GOVERNANCE.md" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\internal\streams\BufferList.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\internal\streams\destroy.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\internal\streams\stream-browser.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\internal\streams\stream.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\_stream_duplex.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\_stream_passthrough.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\_stream_readable.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\_stream_transform.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\lib\_stream_writable.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\LICENSE" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\passthrough.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\readable-browser.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\readable.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\README.md" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\transform.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\writable-browser.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\writable.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\safe-buffer\index.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\safe-buffer\LICENSE" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\safe-buffer\README.md" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\string_decoder\lib\string_decoder.js" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\string_decoder\LICENSE" />
+    <None Include="wwwroot\assets\plugins\jszip\node_modules\string_decoder\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="9.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.0-preview.6.24328.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
@@ -15,6 +54,10 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0-preview.6.24328.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\assets\plugins\jszip\node_modules\safe-buffer\index.d.ts" />
   </ItemGroup>
 
 </Project>
