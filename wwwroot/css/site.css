@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 body, html {
-    font-family: Circular, "Circular Std", Inter, Roboto, Arial, sans-serif !important;
+    background: #181818 !important;
+    color: #fff !important;
+    font-family: 'Inter', 'Poppins', Arial, sans-serif !important;
     font-size: 17px;
     line-height: 1.6;
     letter-spacing: 0.01em;
@@ -46,7 +48,6 @@ html {
 
 body {
   margin-bottom: 60px;
-  background: #191414 !important;
   color: #fff !important;
 }
 
@@ -152,4 +153,224 @@ footer {
 .spotify-card:hover {
     box-shadow: 0 4px 24px 0 rgba(30,217,84,0.15);
     border-color: #1DB954 !important;
+}
+
+/* Hero arka planı ve cam efekti */
+.hero-bg {
+    background: linear-gradient(135deg, #232526 0%, #1DB954 100%);
+    min-height: 100vh;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    position: relative;
+    font-family: 'Inter', 'Poppins', Arial, sans-serif;
+}
+.glass-card {
+    background: rgba(20, 20, 20, 0.96) !important;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 rgba(30,217,84,0.10);
+    border: 1.5px solid rgba(30,217,84,0.15) !important;
+    backdrop-filter: blur(6px);
+    color: #fff !important;
+}
+/* Animasyonlar */
+.animate-pop {
+    animation: popIn 0.7s cubic-bezier(.68,-0.55,.27,1.55) both;
+}
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.animate-fade {
+    animation: fadeIn 1.2s ease both;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.animate-bounce {
+    animation: bounce 1.2s infinite alternate;
+}
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-12px); }
+}
+/* Adım kartları */
+.step-card {
+    background: rgba(30,30,30,0.98);
+    border-radius: 18px;
+    box-shadow: 0 2px 12px 0 rgba(30,217,84,0.10);
+    border: 1px solid #333;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    color: #fff !important;
+    font-family: 'Inter', 'Poppins', Arial, sans-serif;
+    font-size: 1.08rem;
+    font-weight: 500;
+}
+.step-card:hover {
+    box-shadow: 0 4px 24px 0 rgba(30,217,84,0.18);
+    border-color: #1DB954;
+}
+.step-circle {
+    width: 36px;
+    height: 36px;
+    background: #1DB954;
+    color: #191414;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 auto 0.5rem auto;
+    box-shadow: 0 2px 8px 0 rgba(30,217,84,0.10);
+    font-family: 'Inter', 'Poppins', Arial, sans-serif;
+}
+.step-svg svg {
+    display: block;
+    margin: 0 auto 0.5rem auto;
+}
+.glass-card h4, .glass-card h5, .glass-card .card-title {
+    color: #fff !important;
+    font-family: 'Inter', 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.glass-card ul, .glass-card li {
+    color: #fff !important;
+    font-size: 1.08rem;
+    font-family: 'Inter', 'Poppins', Arial, sans-serif;
+}
+.footer-social {
+    margin-top: 2rem;
+    color: #fff;
+    font-size: 1.1rem;
+    font-family: 'Inter', 'Poppins', Arial, sans-serif;
+}
+.footer-social a {
+    color: #fff;
+    transition: color 0.2s;
+    font-size: 1.5rem;
+}
+.footer-social a:hover {
+    color: #1DB954;
+}
+
+/* Monster Notebook tarzı sticky header */
+.navbar {
+    width: 100vw;
+    left: 0;
+    top: 0;
+    min-height: 80px;
+    background: #181818 !important;
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    box-shadow: 0 2px 12px 0 rgba(30,217,84,0.10);
+    border-bottom: 2px solid #1DB954;
+    font-family: 'Inter', 'Poppins', Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff !important;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+}
+.navbar .navbar-brand {
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #fff !important;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+}
+.navbar .nav-link {
+    color: #fff !important;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-right: 1.2rem;
+    transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+    border-radius: 8px;
+    padding: 0.7rem 1.3rem;
+    position: relative;
+}
+.navbar .nav-link:hover, .navbar .nav-link.active {
+    color: #181818 !important;
+    background: #1DB954 !important;
+    box-shadow: 0 2px 8px 0 rgba(30,217,84,0.10);
+}
+.navbar .btn-link.nav-link {
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+.navbar .btn-link.nav-link:hover {
+    color: #181818 !important;
+    background: #1DB954 !important;
+}
+.navbar-toggler {
+    border: none;
+    background: #1DB954 !important;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(25,25,20,0.7)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Monster tarzı ana içerik kutuları */
+.monster-section {
+    background: transparent !important;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 2.5rem 0;
+    margin-bottom: 2.5rem;
+}
+.monster-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px 0 rgba(30,217,84,0.06);
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+.monster-card:hover {
+    box-shadow: 0 4px 24px 0 rgba(30,217,84,0.13);
+    border-color: #1DB954;
+}
+
+/* Monster tarzı footer */
+.monster-footer {
+    background: #181818 !important;
+    color: #fff;
+    padding: 2.5rem 0 1.5rem 0;
+    font-size: 1.08rem;
+    border-top: 3px solid #1DB954;
+}
+.monster-footer .footer-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    color: #1DB954;
+}
+.monster-footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.monster-footer a:hover {
+    color: #1DB954;
+}
+@media (max-width: 991.98px) {
+    .navbar .navbar-brand {
+        margin-left: 1rem;
+    }
+    .navbar .nav-link {
+        margin-right: 0.5rem;
+        padding: 0.7rem 1rem;
+    }
+    .monster-section {
+        padding: 1.2rem 0.5rem;
+    }
+    .monster-card {
+        padding: 1.2rem 0.7rem;
+    }
 }
