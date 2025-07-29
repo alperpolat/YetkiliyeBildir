@@ -1,0 +1,121 @@
+@model YetkiliyeBildir.Models.ApplicationUser
+@{
+    ViewData["Title"] = "Profilim";
+}
+
+<h2 class="fw-bold mb-4 text-theme" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:700;">Profilim</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm rounded-4">
+            <div class="card-header bg-theme text-white">
+                <h5 class="mb-0 fw-bold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Profil Bilgileri</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Profile" method="post">
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">E-posta</label>
+                        <input type="email" class="form-control" value="@Model.Email" readonly />
+                        <small class="text-muted">E-posta adresi değiştirilemez.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Ad Soyad</label>
+                        <input type="text" name="adSoyad" class="form-control" value="@Model.AdSoyad" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Telefon</label>
+                        <input type="tel" name="telefon" class="form-control" value="@Model.Telefon" />
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h6 class="fw-bold mb-3" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Şifre Değiştir (İsteğe Bağlı)</h6>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Mevcut Şifre</label>
+                        <input type="password" name="currentPassword" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Yeni Şifre</label>
+                        <input type="password" name="newPassword" class="form-control" />
+                    </div>
+
+                    <button type="submit" class="btn btn-theme fw-bold rounded-pill px-4" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">
+                        Güncelle
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm rounded-4">
+            <div class="card-header bg-theme text-white">
+                <h5 class="mb-0 fw-bold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Hesap Bilgileri</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Hesap Durumu</label>
+                    <div class="d-flex align-items-center">
+                        @if (Model.EmailConfirmed)
+                        {
+                            <span class="badge bg-success">Onaylı</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning">Onay Bekliyor</span>
+                        }
+                    </div>
+                </div>
+
+                @if (ViewBag.Kurum != null)
+                {
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Bağlı Olduğu Kurum</label>
+                        <p class="mb-1 fw-bold">@ViewBag.Kurum.KurumAdi</p>
+                        <small class="text-muted">@ViewBag.Kurum.KurumMail</small>
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.CheckStatus))
+                {
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Başvuru Durumu</label>
+                        <div class="d-flex align-items-center">
+                            @switch (Model.CheckStatus)
+                            {
+                                case "Onaylandı":
+                                    <span class="badge bg-success">@Model.CheckStatus</span>
+                                    break;
+                                case "Reddedildi":
+                                    <span class="badge bg-danger">@Model.CheckStatus</span>
+                                    break;
+                                default:
+                                    <span class="badge bg-warning">@Model.CheckStatus</span>
+                                    break;
+                            }
+                        </div>
+                    </div>
+                }
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Kayıt Tarihi</label>
+                    <p class="mb-0">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

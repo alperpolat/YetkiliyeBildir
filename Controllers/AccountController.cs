@@ -159,5 +159,80 @@ namespace YetkiliyeBildir.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Kullanıcının kurum bilgilerini de al
+            if (user.YetkiliKurumId.HasValue)
+            {
+                var kurum = await _context.YetkiliKurumlar.FirstOrDefaultAsync(k => k.Id == user.YetkiliKurumId);
+                ViewBag.Kurum = kurum;
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(string adSoyad, string telefon, string currentPassword, string newPassword)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Profil bilgilerini güncelle
+            user.AdSoyad = adSoyad;
+            user.Telefon = telefon;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                // Şifre değişikliği varsa
+                if (!string.IsNullOrEmpty(currentPassword) && !string.IsNullOrEmpty(newPassword))
+                {
+                    var passwordResult = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+                    if (passwordResult.Succeeded)
+                    {
+                        TempData["SuccessMessage"] = "Profil bilgileriniz başarıyla güncellendi.";
+                    }
+                    else
+                    {
+                        foreach (var error in passwordResult.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    TempData["SuccessMessage"] = "Profil bilgileriniz başarıyla güncellendi.";
+                }
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            // Kurum bilgilerini tekrar yükle
+            if (user.YetkiliKurumId.HasValue)
+            {
+                var kurum = await _context.YetkiliKurumlar.FirstOrDefaultAsync(k => k.Id == user.YetkiliKurumId);
+                ViewBag.Kurum = kurum;
+            }
+
+            return View(user);
+        }
     }
 } 
