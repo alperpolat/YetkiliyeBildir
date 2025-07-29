@@ -26,23 +26,40 @@ namespace YetkiliyeBildir.Controllers
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
             IQueryable<Report> reports = _context.Reports.OrderByDescending(r => r.CreatedAt);
 
+            // Debug: Kullanıcı bilgilerini kontrol et
+            Console.WriteLine($"Kullanıcı: {User.Identity.Name}");
+            Console.WriteLine($"Admin mi: {User.IsInRole("Admin")}");
+            Console.WriteLine($"YetkiliKurumId: {user?.YetkiliKurumId}");
+
             if (User.IsInRole("Admin"))
             {
                 // Admin tüm ihbarları görebilir
-                return View(await reports.ToListAsync());
+                var adminReports = await reports.ToListAsync();
+                Console.WriteLine($"Admin - Toplam ihbar sayısı: {adminReports.Count}");
+                return View(adminReports);
             }
             else if (user != null && user.YetkiliKurumId != null)
             {
                 // Kurum personeli sadece kendi kurumunun ihbarlarını görür
                 reports = reports.Where(r => r.YetkiliKurumId == user.YetkiliKurumId);
-                return View(await reports.ToListAsync());
+                var kurumReports = await reports.ToListAsync();
+                Console.WriteLine($"Kurum Personeli - Toplam ihbar sayısı: {kurumReports.Count}");
+                return View(kurumReports);
+            }
+            else if (user != null)
+            {
+                // Vatandaş ise sadece kendi oluşturduğu ihbarları görsün
+                reports = reports.Where(r => r.UserId == user.Id);
+                var vatandasReports = await reports.ToListAsync();
+                Console.WriteLine($"Vatandaş - Toplam ihbar sayısı: {vatandasReports.Count}");
+                Console.WriteLine($"Vatandaş UserId: {user.Id}");
+                return View(vatandasReports);
             }
             else
             {
-                // Vatandaş ise sadece kendi oluşturduğu ihbarları görsün (Report modelinde UserId varsa)
-                // reports = reports.Where(r => r.UserId == user.Id);
-                // return View(await reports.ToListAsync());
-                return View(new List<Report>()); // UserId yoksa boş liste döndür
+                // Kullanıcı bulunamadıysa boş liste döndür
+                Console.WriteLine("Kullanıcı bulunamadı!");
+                return View(new List<Report>());
             }
         }
 
@@ -58,10 +75,31 @@ namespace YetkiliyeBildir.Controllers
         // İhbar ekleme (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Report report, IFormFile? photo, int? selectedAuthorityId, int? selectedYetkiliKurumId)
+        public async Task<IActionResult> Create(Report report, IFormFile? photo)
         {
+            // Manuel validasyon ekle
+            if (!report.AuthorityId.HasValue && !report.YetkiliKurumId.HasValue)
+            {
+                ModelState.AddModelError("", "Lütfen bir yetkili kurum seçiniz.");
+            }
+            else if (report.AuthorityId.HasValue && report.YetkiliKurumId.HasValue)
+            {
+                ModelState.AddModelError("", "Sadece bir kurum seçebilirsiniz.");
+            }
+
             if (ModelState.IsValid)
             {
+                // Kullanıcıyı bul ve ID'sini al
+                var currentUser = await _context.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+                if (currentUser == null)
+                {
+                    ModelState.AddModelError("", "Kullanıcı bulunamadı.");
+                    ViewBag.Categories = _context.Categories.Select(c => c.Name).ToList();
+                    ViewBag.Authorities = _context.Authorities.ToList();
+                    ViewBag.YetkiliKurumlar = _context.YetkiliKurumlar.ToList();
+                    return View(report);
+                }
+
                 if (photo != null && photo.Length > 0)
                 {
                     var uploads = Path.Combine(_env.WebRootPath, "uploads");
@@ -75,21 +113,14 @@ namespace YetkiliyeBildir.Controllers
                     }
                     report.PhotoPath = "/uploads/" + fileName;
                 }
+                
                 report.CreatedAt = DateTime.Now;
-                if (selectedAuthorityId.HasValue && selectedAuthorityId.Value > 0)
-                {
-                    report.AuthorityId = selectedAuthorityId;
-                    report.YetkiliKurumId = null;
-                }
-                else if (selectedYetkiliKurumId.HasValue && selectedYetkiliKurumId.Value > 0)
-                {
-                    report.YetkiliKurumId = selectedYetkiliKurumId;
-                    report.AuthorityId = null;
-                }
+                report.UserId = currentUser.Id; // Kullanıcının gerçek ID'sini ekle
                 _context.Reports.Add(report);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            
             ViewBag.Categories = _context.Categories.Select(c => c.Name).ToList();
             ViewBag.Authorities = _context.Authorities.ToList();
             ViewBag.YetkiliKurumlar = _context.YetkiliKurumlar.ToList();

@@ -34,7 +34,10 @@ namespace YetkiliyeBildir.Models
         public int? YetkiliKurumId { get; set; }
         public YetkiliKurum? YetkiliKurum { get; set; }
 
-        public string FirmaAksiyon { get; set; } // İşlemeAlındı, Reddedildi, Tamamlandı
-        public string FirmaNotu { get; set; }
+        public string? UserId { get; set; } // İhbarı oluşturan kullanıcının ID'si
+        public ApplicationUser? User { get; set; } // Navigation property
+
+        public string? FirmaAksiyon { get; set; } // İşlemeAlındı, Reddedildi, Tamamlandı
+        public string? FirmaNotu { get; set; }
     }
 } 

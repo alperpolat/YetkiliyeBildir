@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\assets\plugins\jszip\node_modules\readable-stream\package.json" />
-    <Content Include="wwwroot\assets\plugins\jszip\node_modules\safe-buffer\package.json" />
-    <Content Include="wwwroot\assets\plugins\jszip\node_modules\string_decoder\package.json" />
   </ItemGroup>
 
   <ItemGroup>

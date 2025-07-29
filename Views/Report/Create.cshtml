@@ -7,6 +7,7 @@
 }
 <h2 class="fw-bold mb-4 text-theme" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:700;">İhbar Ekle</h2>
 <form asp-action="Create" enctype="multipart/form-data" method="post" class="bg-white rounded-4 shadow p-4">
+    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
     <div class="mb-3">
         <label asp-for="Category" class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Kategori</label>
         <select asp-for="Category" class="form-select fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;" required>
@@ -28,7 +29,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Klasik Yetkili Kurumlar</label>
-                <select name="selectedAuthorityId" class="form-select fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;">
+                <select asp-for="AuthorityId" class="form-select fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;">
                     <option value="">Seçiniz</option>
                     @foreach (var a in authorities)
                     {
@@ -38,7 +39,7 @@
             </div>
             <div class="col-md-6">
                 <label class="form-label fw-semibold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;">Platforma Kayıtlı Kurumlar</label>
-                <select name="selectedYetkiliKurumId" class="form-select fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;">
+                <select asp-for="YetkiliKurumId" class="form-select fs-16px" style="font-family:'Inter','Roboto',Arial,sans-serif;font-size:16px;">
                     <option value="">Seçiniz</option>
                     @foreach (var k in kurumlar)
                     {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YetkiliyeBildir.Models;
 
@@ -11,9 +12,11 @@ using YetkiliyeBildir.Models;
 namespace YetkiliyeBildir.Migrations
 {
     [DbContext(typeof(YetkiliyeBildirContext))]
-    partial class YetkiliyeBildirContextModelSnapshot : ModelSnapshot
+    [Migration("20250729171805_MakeFirmaFieldsNullable")]
+    partial class MakeFirmaFieldsNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,17 +322,12 @@ namespace YetkiliyeBildir.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int?>("YetkiliKurumId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorityId");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("YetkiliKurumId");
 
@@ -433,17 +431,11 @@ namespace YetkiliyeBildir.Migrations
                         .WithMany()
                         .HasForeignKey("AuthorityId");
 
-                    b.HasOne("YetkiliyeBildir.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.HasOne("YetkiliyeBildir.Models.YetkiliKurum", "YetkiliKurum")
                         .WithMany()
                         .HasForeignKey("YetkiliKurumId");
 
                     b.Navigation("Authority");
-
-                    b.Navigation("User");
 
                     b.Navigation("YetkiliKurum");
                 });
