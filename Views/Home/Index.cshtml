@@ -64,7 +64,14 @@
                                 <li>Takip edilebilir süreç</li>
                                 <li>Gizlilik ve güvenlik</li>
                             </ul>
-                            <a class="btn btn-theme rounded-pill px-4 fw-bold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;" href="/Account/Register">Kayıt Ol</a>
+                            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-theme rounded-pill px-4 fw-bold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;" href="/Report/Create">Bildirim Oluştur</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-theme rounded-pill px-4 fw-bold" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:600;" href="/Account/Register">Kayıt Ol</a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -92,6 +99,7 @@
         </div>
     </div>
 </div>
+
 <!-- REFERANSLAR/GERİ BİLDİRİMLER ALANI BAŞLANGIÇ -->
 <div class="py-5" style="background:#f3f6fa;">
     <div class="container-xxl p-3 p-lg-5">
@@ -101,7 +109,7 @@
         </div>
         <div class="row g-4 justify-content-center">
             <div class="col-lg-4 col-md-6">
-                <div class="card p-4 border-0 h-100 rounded-5 shadow bg-white">
+                <div class="card p-4 border-0 h-100 rounded-5 shadow bg-white" style="min-height: 280px;">
                     <div class="d-flex align-items-center mb-3">
                         <img src="/assets/img/user/user.jpg" class="rounded-circle me-3 w-50px" alt="Vatandaş">
                         <div>
@@ -109,9 +117,9 @@
                             <small class="text-muted">Vatandaş</small>
                         </div>
                     </div>
-                    <div class="mb-4 d-flex">
+                    <div class="mb-4 d-flex flex-grow-1">
                         <i class="fa fa-quote-left fa-2x text-body text-opacity-15"></i>
-                        <div class="p-3">
+                        <div class="p-3 flex-grow-1">
                             <div class="text-warning d-flex mb-2">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -119,7 +127,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            Bildirdiğim sorun çok kısa sürede çözüldü. Takip edilebilir süreç ve bilgilendirmeler harika!
+                            <p class="mb-0">Bildirdiğim sorun çok kısa sürede çözüldü. Takip edilebilir süreç ve bilgilendirmeler harika!</p>
                         </div>
                         <div class="d-flex align-items-end">
                             <i class="fa fa-quote-right fa-2x text-body text-opacity-15"></i>
@@ -128,7 +136,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
-                <div class="card p-4 border-0 h-100 rounded-5 shadow bg-white">
+                <div class="card p-4 border-0 h-100 rounded-5 shadow bg-white" style="min-height: 280px;">
                     <div class="d-flex align-items-center mb-3">
                         <img src="/assets/img/user/user-7.jpg" class="rounded-circle me-3 w-50px" alt="Kurum Yetkilisi">
                         <div>
@@ -136,9 +144,9 @@
                             <small class="text-muted">Kurum Yetkilisi</small>
                         </div>
                     </div>
-                    <div class="mb-4 d-flex">
+                    <div class="mb-4 d-flex flex-grow-1">
                         <i class="fa fa-quote-left fa-2x text-body text-opacity-15"></i>
-                        <div class="p-3">
+                        <div class="p-3 flex-grow-1">
                             <div class="text-warning d-flex mb-2">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -146,7 +154,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-half-alt"></i>
                             </div>
-                            İhbarları panelden yönetmek çok pratik. Vatandaşlarla iletişim ve çözüm süreçleri hızlandı.
+                            <p class="mb-0">İhbarları panelden yönetmek çok pratik. Vatandaşlarla iletişim ve çözüm süreçleri hızlandı.</p>
                         </div>
                         <div class="d-flex align-items-end">
                             <i class="fa fa-quote-right fa-2x text-body text-opacity-15"></i>
@@ -155,7 +163,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
-                <div class="card p-4 border-0 h-100 rounded-5 shadow bg-white">
+                <div class="card p-4 border-0 h-100 rounded-5 shadow bg-white" style="min-height: 280px;">
                     <div class="d-flex align-items-center mb-3">
                         <img src="/assets/img/user/user-10.jpg" class="rounded-circle me-3 w-50px" alt="Vatandaş">
                         <div>
@@ -163,9 +171,9 @@
                             <small class="text-muted">Vatandaş</small>
                         </div>
                     </div>
-                    <div class="mb-4 d-flex">
+                    <div class="mb-4 d-flex flex-grow-1">
                         <i class="fa fa-quote-left fa-2x text-body text-opacity-15"></i>
-                        <div class="p-3">
+                        <div class="p-3 flex-grow-1">
                             <div class="text-warning d-flex mb-2">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -173,7 +181,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            Mobil bildirimler sayesinde süreci anlık takip edebildim. Herkese tavsiye ederim!
+                            <p class="mb-0">Mobil bildirimler sayesinde süreci anlık takip edebildim. Herkese tavsiye ederim!</p>
                         </div>
                         <div class="d-flex align-items-end">
                             <i class="fa fa-quote-right fa-2x text-body text-opacity-15"></i>
@@ -185,6 +193,107 @@
     </div>
 </div>
 <!-- REFERANSLAR/GERİ BİLDİRİMLER ALANI BİTİŞ -->
+
+<!-- CANLI HARİTA VE SON BİLDİRİMLER ALANI BAŞLANGIÇ -->
+<div class="py-5" style="background:#f8f9fa;">
+    <div class="container-xxl p-3 p-lg-5">
+        <div class="text-center mb-5">
+            <h1 class="mb-3 text-center" style="font-family:'Inter','Roboto',Arial,sans-serif;font-weight:700;">Canlı Harita & Son Bildirimler</h1>
+            <p class="fs-16px text-body text-opacity-50 text-center mb-0" style="font-family:'Inter','Roboto',Arial,sans-serif;">Şehrimizdeki güncel bildirimleri haritada görün ve son yapılan ihbarları takip edin.</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Canlı Harita -->
+            <div class="col-lg-8">
+                <div class="card border-0 rounded-4 shadow h-100">
+                    <div class="card-header bg-white border-0 rounded-top-4 p-4">
+                        <h4 class="mb-0 fw-bold text-theme">
+                            <i class="fa fa-map-marker-alt me-2"></i>Canlı Harita
+                        </h4>
+                        <p class="text-muted mb-0 small">Şehrimizdeki tüm bildirimlerin konumları</p>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="harita" style="height: 400px; width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Son Bildirimler Paneli -->
+            <div class="col-lg-4">
+                <div class="card border-0 rounded-4 shadow h-100">
+                    <div class="card-header bg-white border-0 rounded-top-4 p-4">
+                        <h4 class="mb-0 fw-bold text-theme">
+                            <i class="fa fa-bell me-2"></i>Son 5 Bildirim
+                        </h4>
+                        <p class="text-muted mb-0 small">En son yapılan ihbarlar</p>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            @if (ViewBag.SonBildirimler != null && ViewBag.SonBildirimler.Count > 0)
+                            {
+                                foreach (var bildirim in ViewBag.SonBildirimler)
+                                {
+                                    <div class="list-group-item border-0 p-3">
+                                        <div class="d-flex align-items-start">
+                                            <div class="me-3">
+                                                @{
+                                                    var statusClass = bildirim.Status.ToString() switch
+                                                    {
+                                                        "Bekliyor" => "bg-warning",
+                                                        "Alindi" => "bg-info",
+                                                        "Cozuldu" => "bg-success",
+                                                        _ => "bg-secondary"
+                                                    };
+                                                    var statusText = bildirim.Status.ToString() switch
+                                                    {
+                                                        "Bekliyor" => "Bekliyor",
+                                                        "Alindi" => "Alındı",
+                                                        "Cozuldu" => "Çözüldü",
+                                                        _ => bildirim.Status.ToString()
+                                                    };
+                                                }
+                                                <span class="badge @statusClass rounded-pill px-2 py-1 small">@statusText</span>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1 fw-semibold">@bildirim.Category</h6>
+                                                <p class="mb-1 text-muted small">@(bildirim.Description.Length > 60 ? bildirim.Description.Substring(0, 60) + "..." : bildirim.Description)</p>
+                                                <small class="text-muted">
+                                                    <i class="fa fa-clock me-1"></i>@bildirim.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="list-group-item border-0 p-4 text-center">
+                                    <i class="fa fa-inbox fa-2x text-muted mb-2"></i>
+                                    <p class="text-muted mb-0">Henüz bildirim bulunmuyor</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0 rounded-bottom-4 p-3">
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <a href="/Report/Create" class="btn btn-theme btn-sm w-100">
+                                <i class="fa fa-plus me-2"></i>Yeni Bildirim Oluştur
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Account/Login" class="btn btn-theme btn-sm w-100">
+                                <i class="fa fa-sign-in-alt me-2"></i>Giriş Yap ve Bildirim Oluştur
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CANLI HARİTA VE SON BİLDİRİMLER ALANI BİTİŞ -->
 <!-- BLOG/KARTLAR ALANI BAŞLANGIÇ -->
 <div class="py-5">
     <div class="container-xxl p-3 p-lg-5">
@@ -314,4 +423,96 @@
     </div>
 </div>
 <!-- İLETİŞİM BLOĞU BİTİŞ -->
+
+@section Scripts {
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Harita verilerini C# tarafından al
+        var haritaVerileri = @Html.Raw(Json.Serialize(ViewBag.HaritaVerileri ?? new List<object>()));
+        
+        // Harita başlatma
+        function initHarita() {
+            // Türkiye'nin merkezi koordinatları (İstanbul)
+            var map = L.map('harita').setView([41.0082, 28.9784], 10);
+            
+            // OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Bildirim noktalarını ekle
+            haritaVerileri.forEach(function(bildirim) {
+                if (bildirim.latitude && bildirim.longitude) {
+                    var status = bildirim.status;
+                    var category = bildirim.category;
+                    
+                    // Duruma göre ikon rengi
+                    var iconColor = 'blue';
+                    switch(status) {
+                        case 'Bekliyor':
+                            iconColor = 'orange';
+                            break;
+                        case 'Alindi':
+                            iconColor = 'blue';
+                            break;
+                        case 'Cozuldu':
+                            iconColor = 'green';
+                            break;
+                    }
+                    
+                    // Özel ikon oluştur
+                    var customIcon = L.divIcon({
+                        className: 'custom-div-icon',
+                        html: `<div style="background-color: ${iconColor}; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+                        iconSize: [12, 12],
+                        iconAnchor: [6, 6]
+                    });
+                    
+                    // Marker ekle
+                    var marker = L.marker([bildirim.latitude, bildirim.longitude], {icon: customIcon})
+                        .addTo(map)
+                        .bindPopup(`
+                            <div style="min-width: 200px;">
+                                <h6 style="margin: 0 0 5px 0; color: #333;">${category}</h6>
+                                <p style="margin: 0; font-size: 12px; color: #666;">
+                                    Durum: <span style="color: ${iconColor}; font-weight: bold;">${status}</span>
+                                </p>
+                            </div>
+                        `);
+                }
+            });
+            
+            // Harita kontrollerini özelleştir
+            map.zoomControl.setPosition('bottomleft');
+        }
+        
+        // Sayfa yüklendiğinde haritayı başlat
+        document.addEventListener('DOMContentLoaded', function() {
+            initHarita();
+        });
+        
+        // Harita stil düzeltmeleri
+        document.addEventListener('DOMContentLoaded', function() {
+            var style = document.createElement('style');
+            style.textContent = `
+                .custom-div-icon {
+                    background: transparent;
+                    border: none;
+                }
+                .leaflet-popup-content-wrapper {
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                }
+                .leaflet-popup-content {
+                    margin: 8px 12px;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+}
 

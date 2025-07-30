@@ -6,6 +6,7 @@ using System.IO;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace YetkiliyeBildir.Controllers
 {
@@ -64,6 +65,7 @@ namespace YetkiliyeBildir.Controllers
         }
 
         // İhbar ekleme formu (GET)
+        [Authorize]
         public IActionResult Create()
         {
             ViewBag.Categories = _context.Categories.Select(c => c.Name).ToList();
@@ -75,6 +77,7 @@ namespace YetkiliyeBildir.Controllers
         // İhbar ekleme (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create(Report report, IFormFile? photo)
         {
             // Manuel validasyon ekle
